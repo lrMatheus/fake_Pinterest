@@ -1,0 +1,35 @@
+{% extends "homepage.html" %}
+
+{% block body %}
+    {% include "navbar.html" %}
+
+ <body>
+    <div class="container">
+      
+
+      <div class="conteudo">
+        {% for foto in fotos %}
+
+        <div class="bloco-imagem">
+          {% if foto.imagem.startswith('http') %}
+              <!-- Imagem do Cloudinary -->
+              <img src="{{ foto.imagem }}" alt="Foto do usuário" />
+          {% else %}
+              <!-- Imagem local (fallback) -->
+              <img src="{{ url_for('static', filename='fotos_post/{}'.format(foto.imagem)) }}" alt="Foto do usuário" />
+          {% endif %}
+          <a href="{{ url_for('perfil', id_usuario=foto.id_usuario) }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></a>
+        </div>
+
+        {% endfor %}
+
+        
+      </div>
+    </div>
+  </body>
+
+
+
+   
+   
+{% endblock %}

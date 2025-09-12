@@ -1,0 +1,406 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Tema Claro (padrão) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-nav: #111827;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-nav: #ffffff;
+  --accent-red: #DC2626;
+  --accent-blue: #2563EB;
+  --border-color: #E5E7EB;
+  --card-bg: #E5E7EB;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+}
+
+[data-theme="dark"] {
+  /* Tema Escuro (baseado na imagem) */
+  --bg-primary: #0f0f23;
+  --bg-secondary: #1a1a2e;
+  --bg-nav: #0a0a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-nav: #ffffff;
+  --accent-red: #ff4757;
+  --accent-blue: #3742fa;
+  --border-color: #2d2d44;
+  --card-bg: #1e1e3a;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #e94560 100%);
+}
+
+body {
+  font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: var(--text-primary);
+  background: var(--gradient);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Cabeçalho - Preto com logo vermelho */
+nav {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-nav);
+  box-shadow: 0 2px 10px var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  color: var(--accent-red);
+  font-size: 24px;
+  font-weight: bold;
+  display: inline;
+}
+
+img {
+  width: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.logo-pinterest {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  column-gap: 8px;
+}
+
+.link-nav {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-nav);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.link-nav:hover {
+  color: var(--accent-red);
+  text-decoration: none;
+}
+
+.link-nav svg {
+  transition: transform 0.3s ease;
+}
+
+.link-nav:hover svg {
+  transform: scale(1.1);
+}
+
+.restante-nav {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  width: fit-content;
+}
+
+.container-login {
+  padding-bottom: 100px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bg-imagem-pinterest {
+  width: 100%;
+  position: fixed;
+  top: 50vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.container-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 24, 39, 0.8);
+  display: flex;
+  z-index: 1000;
+}
+
+.popup {
+  width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  padding: 40px;
+  border-radius: 16px;
+  background-color: var(--bg-primary);
+  box-shadow: 0 20px 40px var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.div-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+
+.div-botao {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+  margin-top: 16px;
+}
+
+.label {
+  margin-right: auto;
+  margin-left: 15px;
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  font-size: 16px;
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Botão Azul para Salvar */
+.botao-login {
+  border-radius: 12px;
+  padding: 16px 24px;
+  width: 100%;
+  border: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--accent-blue);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.botao-login:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.link-criarconta {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-criarconta:hover {
+  color: var(--accent-red);
+  text-decoration: underline;
+}
+
+.botao-perfil a {
+  background-color: var(--bg-nav);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.botao-perfil a:hover {
+  background-color: var(--accent-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+}
+
+/* Grid de Pins - Cards cinza claro com bordas azuis no hover */
+.conteudo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  width: 100%;
+  max-width: 100vw;
+  gap: 20px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.bloco-imagem {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.bloco-imagem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px var(--shadow);
+  border: 2px solid var(--accent-blue);
+}
+
+.bloco-imagem img {
+  border-radius: 16px;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.bloco-imagem:hover img {
+  transform: scale(1.05);
+}
+
+/* Botão de alternância de tema */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-nav);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.bloco-add-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 16px;
+  padding: 32px;
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  margin: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+}
+
+.botao-arquivo {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 0;
+  background-color: var(--bg-nav);
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.botao-arquivo:hover {
+  background-color: var(--accent-red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+}
+
+.bloco-arquivo {
+  background-color: var(--card-bg);
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.bloco-arquivo:hover {
+  border-color: var(--accent-blue);
+}
+
+.input-arquivo {
+  display: none;
+}
+
+#imagem-arquivo {
+  display: none;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+#imagem-arquivo.visivel {
+  display: inline-block;
+}
+
+.bloco-add-img .botao-login {
+  width: auto;
+  padding: 12px 32px;
+}
+
+.bloco-input-botao {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .conteudo {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .bloco-imagem img {
+    height: 250px;
+  }
+  
+  nav {
+    padding: 12px 16px;
+  }
+  
+  .restante-nav {
+    column-gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  
+  .popup {
+    width: 90%;
+    padding: 24px;
+  }
+}

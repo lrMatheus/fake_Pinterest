@@ -1,0 +1,64 @@
+{% extends "homepage.html" %}
+
+{% block titulo %}
+Perfil - {{ usuario.username }}
+{% endblock %}
+
+{% block body %}
+    {% include "navbar.html" %}
+    
+
+{% if form and current_user.is_authenticated and usuario.id == current_user.id %}
+    <div class="container">
+        <form class="bloco-add-img"  method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <h2>{{ usuario.username }} - Enviar foto</h2>
+            <div class="bloco-arquivo">
+                <label for="foto" class="botao-arquivo">
+                    Escolher arquivo
+                    {{ form.foto(class="input-arquivo", id="foto") }}
+                </label>
+                <span id="imagem-arquivo" class=""></span>
+            </div>
+            {{ form.botao(class="botao-login") }}
+        </form>
+    </div>
+{% else %}
+    <div class="bloco-add-img">
+        <h2>{{ usuario.username }} - Ver Perfil</h2>
+    </div>
+{% endif %}
+
+<div class="conteudo">
+    {% if usuario.fotos %}
+        {% for foto in usuario.fotos %}
+            <div class="bloco-imagem">
+                {% if foto.imagem.startswith('http') %}
+                    <!-- Imagem do Cloudinary -->
+                    <img src="{{ foto.imagem }}" alt="Foto do usuário" />
+                {% else %}
+                    <!-- Imagem local (fallback) -->
+                    <img src="{{ url_for('static', filename='fotos_post/{}'.format(foto.imagem)) }}" alt="Foto do usuário" />
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+    <script>
+      let input = document.getElementById("foto");
+      let imagemArquivo = document.getElementById("imagem-arquivo");
+
+      input.addEventListener("change", () => {
+        let inputImagem = document.querySelector("input[type=file]").files[0];
+
+        imagemArquivo.classList.add("visivel");
+        imagemArquivo.innerText = inputImagem.name;
+      });
+    </script>
+
+{% endblock %}
+
+
+
+  
